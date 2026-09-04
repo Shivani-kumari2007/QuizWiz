@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-7">
+    <div class="card p-4">
+      <h3 class="mb-3">Create a new quiz</h3>
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Quiz title</label>
+          <input type="text" class="form-control" name="title" placeholder="e.g. Chapter 3 - Data Structures" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description (optional)</label>
+          <textarea class="form-control" name="description" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create & add questions</button>
+        <a href="{{ url_for('teacher_dashboard') }}" class="btn btn-link">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

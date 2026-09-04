@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4>Add question to: {{ quiz.title }}</h4>
+      <span class="badge bg-light text-dark border">{{ questions|length }} added so far</span>
+    </div>
+
+    <div class="card p-4">
+      <form method="POST">
+        <div class="mb-3">
+          <label class="form-label">Question text</label>
+          <input type="text" class="form-control" name="text" required>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Option A</label>
+            <input type="text" class="form-control" name="option_a" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Option B</label>
+            <input type="text" class="form-control" name="option_b" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Option C</label>
+            <input type="text" class="form-control" name="option_c" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Option D</label>
+            <input type="text" class="form-control" name="option_d" required>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Correct option</label>
+          <select class="form-select" name="correct_option" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+          </select>
+        </div>
+
+        <button type="submit" name="add_another" class="btn btn-outline-primary">Save & add another</button>
+        <button type="submit" name="add_and_finish" class="btn btn-primary">Save & finish</button>
+      </form>
+    </div>
+
+    {% if questions %}
+    <div class="mt-4">
+      <h6 class="text-muted">Questions added:</h6>
+      <ul class="list-group">
+        {% for q in questions %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ loop.index }}. {{ q.text }}
+          <form method="POST" action="{{ url_for('delete_question', quiz_id=quiz.id, q_id=q.id) }}">
+            <button class="btn btn-sm btn-outline-danger">Remove</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

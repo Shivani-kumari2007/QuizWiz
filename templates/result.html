@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center text-center">
+  <div class="col-md-6">
+    <div class="card p-5">
+      <h4 class="text-muted mb-4">{{ attempt.quiz_title }}</h4>
+      <div class="score-circle">{{ percentage }}%</div>
+      <p class="mt-4 fs-5">You scored <strong>{{ attempt.score }} / {{ attempt.total }}</strong></p>
+      <div class="alert alert-{{ remark_level }} mt-3">
+        {{ remark_text }}
+      </div>
+      <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Back to Dashboard</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5">
+    <div class="card p-4">
+      <h4 class="mb-3 text-center">Enter Quiz Code</h4>
+      <form method="POST">
+        <div class="mb-3">
+          <input type="text" class="form-control text-center text-uppercase" name="code"
+                 placeholder="e.g. AB12CD" maxlength="8" required style="letter-spacing:3px;font-weight:600;">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Join Quiz</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

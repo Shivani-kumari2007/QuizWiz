@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <h3>{{ quiz.title }}</h3>
+    <p class="text-muted mb-4">{{ quiz.description }} &middot; {{ questions|length }} question(s)</p>
+
+    <form method="POST" action="{{ url_for('submit_quiz', quiz_id=quiz.id) }}" id="quizForm">
+      {% for q in questions %}
+      <div class="card p-4 mb-3">
+        <h5 class="mb-3">{{ loop.index }}. {{ q.text }}</h5>
+        {% for letter, text in [('A', q.option_a), ('B', q.option_b), ('C', q.option_c), ('D', q.option_d)] %}
+        <div class="form-check">
+          <input class="form-check-input d-none" type="radio" name="question_{{ q.id }}" id="q{{ q.id }}_{{ letter }}" value="{{ letter }}" required>
+          <label class="option-label" for="q{{ q.id }}_{{ letter }}">{{ letter }}. {{ text }}</label>
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary btn-lg w-100 mb-5">Submit Quiz</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll('.option-label').forEach(label => {
+    label.addEventListener('click', () => {
+      const input = document.getElementById(label.getAttribute('for'));
+      const name = input.name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(i => {
+        document.querySelector(`label[for="${i.id}"]`).classList.remove('selected');
+      });
+      input.checked = true;
+      label.classList.add('selected');
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+  <h1 class="display-5 fw-bold">Create quizzes. Share a link. Get instant results.</h1>
+  <p class="lead text-muted">Teachers build quizzes in minutes. Students join with a code or link and get graded automatically, with remarks.</p>
+  <div class="mt-4">
+    <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+    <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">I already have an account</a>
+  </div>
+</div>
+
+<div class="row mt-5 g-4">
+  <div class="col-md-6">
+    <div class="card p-4 h-100">
+      <h4>👩‍🏫 For Teachers</h4>
+      <p class="text-muted">Create a quiz, add multiple-choice questions, and instantly get a shareable link / code. Track every student's score.</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-4 h-100">
+      <h4>🎓 For Students</h4>
+      <p class="text-muted">Open the link your teacher shares, take the quiz, and see your score with a personalized remark the moment you submit.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

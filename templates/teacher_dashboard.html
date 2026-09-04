@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h3>Your Quizzes</h3>
+  <a href="{{ url_for('create_quiz') }}" class="btn btn-primary">+ New Quiz</a>
+</div>
+
+{% if quizzes %}
+  <div class="row g-4">
+    {% for quiz in quizzes %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card p-3 h-100">
+        <div class="d-flex justify-content-between">
+          <h5>{{ quiz.title }}</h5>
+          {% if quiz.is_active %}
+            <span class="badge bg-success align-self-start">Open</span>
+          {% else %}
+            <span class="badge bg-secondary align-self-start">Closed</span>
+          {% endif %}
+        </div>
+        <p class="text-muted small">{{ quiz.description or 'No description' }}</p>
+        <p class="mb-1"><strong>{{ quiz.question_count }}</strong> question(s) &middot; <strong>{{ quiz.attempt_count }}</strong> attempt(s)</p>
+        <a href="{{ url_for('quiz_detail', quiz_id=quiz.id) }}" class="btn btn-outline-primary btn-sm mt-2">Manage</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="card p-5 text-center">
+    <p class="text-muted mb-3">You haven't created any quizzes yet.</p>
+    <a href="{{ url_for('create_quiz') }}" class="btn btn-primary">Create your first quiz</a>
+  </div>
+{% endif %}
+{% endblock %}
